@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:放的是接口的全限定类名，也就是../*Mapper
+-->
+<mapper namespace="com.dao.OrderListMapper">
+   <!-- <resultMap id="orderList" type="Order">
+        <result property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="loginName" column="loginName"/>
+        <result property="userAddress" column="userAddress"/>
+        <collection property="orderDetailList" ofType="OrderDetail">
+            <result property="orderId" column="orderId"/>
+            <result property="productId" column="productId"/>
+            <result property="quantity" column="quantity"/>
+            <result property="cost" column="cost"/>
+            &lt;!&ndash;<result property="product" column="cost"/>&ndash;&gt;
+        </collection>
+    </resultMap>-->
+
+    <select id="findOrdersByUserId" resultType="com.entity.Order">
+       select o.* from easybuy_order o
+       where o.userId = #{userId}
+    </select>
+    <select id="findAllorder" resultType="com.entity.Order">
+         select o.* from easybuy_order o
+    </select>
+
+   <!-- <resultMap id="orderDetailList" type="OrderDetail">
+        <result property="id" column="id"/>
+        <result property="orderId" column="orderId"/>
+        <result property="cost" column="cost"/>
+        <result property="productId" column="productId"/>
+        <association property="product" javaType="Product">
+            <id property="id" column="pid"/>
+            <result property="name" column="name"/>
+            <result property="price" column="price"/>
+            <result property="stock" column="stock"/>
+            <result property="fileName" column="fileName"/>
+            <result property="isDelete" column="isDelete"/>
+        </association>
+    </resultMap>-->
+    <select id="findProductsByOrderId" resultType="OrderDetail">
+        select d.* from easybuy_order_detail d
+        where d.orderId = #{orderId}
+    </select>
+    <select id="findProductById" resultType="com.entity.Product">
+        select * from easybuy_product where id= #{productId}
+    </select>
+
+</mapper>

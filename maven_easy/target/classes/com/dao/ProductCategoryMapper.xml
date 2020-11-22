@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:放的是接口的全限定列名，也就是../*Mapper
+-->
+<mapper namespace="com.dao.ProductCategoryMapper">
+
+
+    <select id="queryAllCategory" resultType="com.entity.ProductCategory">
+        SELECT * FROM easybuy_product_category
+    </select>
+    <select id="queryNameByType" resultType="com.entity.ProductCategory">
+        SELECT * FROM easybuy_product_category where `type` = #{type}
+    </select>
+    <select id="queryPageProCategory" resultType="com.entity.ProductCategory">
+        SELECT * FROM easybuy_product_category order by `type` limit #{from},#{pageSize}
+    </select>
+    <select id="queryTotalCounts" resultType="java.lang.Integer">
+        SELECT count(1) FROM easybuy_product_category
+    </select>
+    <select id="queryParentName" resultType="java.lang.String">
+        SELECT `name` FROM easybuy_product_category WHERE id = #{parentId}
+    </select>
+    <select id="queryType" resultType="com.entity.ProductCategory">
+        SELECT * FROM `easybuy_product_category` WHERE parentId = #{parentId}
+    </select>
+</mapper>

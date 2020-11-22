@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:放的是接口的全限定列名，也就是../*Mapper
+-->
+<mapper namespace="com.dao.NewsMapper">
+
+    <select id="queryAllNews" resultType="com.entity.News">
+        select * from easybuy_news
+    </select>
+    <select id="queryTotalCounts" resultType="java.lang.Integer">
+        SELECT count(1) FROM easybuy_news
+    </select>
+    <select id="queryPageNews" resultType="com.entity.News">
+        SELECT * FROM easybuy_news limit #{from},#{pageSize}
+    </select>
+    <select id="queryNewsById" resultType="com.entity.News">
+        SELECT * FROM easybuy_news where id = #{id}
+    </select>
+</mapper>

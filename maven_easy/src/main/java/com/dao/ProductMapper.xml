@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:放的是接口的全限定列名，也就是../*Mapper
+-->
+<mapper namespace="com.dao.ProductMapper">
+    <insert id="addProduct">
+        INSERT
+        INTO easybuy_product
+        (`name`,fileName,price,stock,description,
+        categoryLevel1Id, categoryLevel2Id, categoryLevel3Id)
+        VALUES(#{name},#{fileName},#{price},#{stock},#{description},
+        #{categoryLevel1Id},#{categoryLevel2Id},#{categoryLevel3Id})
+    </insert>
+    <update id="updateProductById">
+        UPDATE easybuy_product
+        SET name = #{name}, description = #{description}, price = #{price}, stock = #{stock},
+        categoryLevel1Id = #{categoryLevel1Id}, categoryLevel2Id = #{categoryLevel2Id},
+        categoryLevel3Id = #{categoryLevel3Id},fileName = #{fileName}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteProductById">
+        DELETE FROM easybuy_product WHERE id = #{id}
+    </delete>
+
+
+    <select id="queryPageProduct" resultType="com.entity.Product">
+        SELECT * FROM easybuy_product limit #{from},#{pageSize}
+    </select>
+    <select id="queryTotalCounts" resultType="java.lang.Integer">
+        SELECT count(1) FROM easybuy_product
+    </select>
+    <select id="queryAllProduct" resultType="com.entity.Product">
+        SELECT * FROM easybuy_product
+    </select>
+    <select id="queryProductById" resultType="com.entity.Product">
+        SELECT * FROM easybuy_product WHERE id = #{id}
+    </select>
+    <select id="queryProductsByCate1Id" resultType="com.entity.Product">
+        SELECT * FROM `easybuy_product` WHERE categoryLevel1Id = #{categoryLevel1Id}
+    </select>
+    <select id="queryProductsByCate2Id" resultType="com.entity.Product">
+        SELECT * FROM `easybuy_product` WHERE categoryLevel2Id = #{categoryLevel2Id}
+    </select>
+    <select id="queryProductsByCate3Id" resultType="com.entity.Product">
+        SELECT * FROM `easybuy_product` WHERE categoryLevel3Id = #{categoryLevel3Id}
+    </select>
+</mapper>

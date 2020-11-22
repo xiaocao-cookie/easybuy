@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:放的是接口的全限定列名，也就是../*Mapper
+-->
+<mapper namespace="com.dao.UserMapper">
+    <insert id="addUser">
+        insert into easybuy_user
+        (loginName, userName, password,
+        sex, identityCode,  email,  mobile, type)
+        values(#{loginName}, #{userName}, #{password},
+        #{sex}, #{identityCode},  #{email},  #{mobile}, 0)
+    </insert>
+
+    <select id="queryAllUser" resultType="com.entity.User">
+        select * from easybuy_user
+    </select>
+    <select id="findUser" resultType="com.entity.User">
+        select * from easybuy_user
+        where loginName = #{loginName} and password =#{password}
+    </select>
+    <select id="queryPageUser" resultType="com.entity.User">
+        select * from easybuy_user limit #{from},#{pageSize}
+    </select>
+    <select id="queryTotalCounts" resultType="java.lang.Integer">
+        select count(1) from easybuy_user
+    </select>
+</mapper>

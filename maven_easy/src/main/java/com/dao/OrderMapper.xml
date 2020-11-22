@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:放的是接口的全限定列名，也就是../*Mapper
+-->
+<mapper namespace="com.dao.OrderMapper">
+
+
+    <select id="queryPageOrders" resultType="com.entity.Order">
+        SELECT * FROM easybuy_order ORDER BY createTime limit #{from},#{pageSize}
+    </select>
+    <select id="queryTotalCounts" resultType="java.lang.Integer">
+        SELECT count(1) FROM easybuy_order
+    </select>
+</mapper>
